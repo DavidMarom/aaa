@@ -7,7 +7,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.loader.csv_loader import CSVTextDataSetLoader
 
-ENCODING = 'latin-1' # Relevant Encoding for tweets_dataset.csv
+ENCODING = 'utf-8' # Relevant Encoding for tweets_dataset.csv
 DATASET_FILEPATH_CSV = "data/tweets_dataset.csv"
 
 def test_csv_loader_basic():
