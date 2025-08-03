@@ -3,11 +3,11 @@ import string
 
 def clean_tweet_data(df: pd.DataFrame) -> pd.DataFrame:
 
-    # keep only relevant columns
-    df_clean = df[['Text', 'Biased']].copy()
-
     # remove rows with NaN in 'Biased' column
-    df_clean = df_clean.dropna(subset=['Biased'])
+    df_clean = df.dropna(subset=['Biased']).copy()
+
+    # keep only relevant columns
+    df_clean = df_clean[['Text']]
 
     # clean the text
     def clean_text(text):
