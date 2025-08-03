@@ -5,4 +5,4 @@ class TextDataSet:
         self.data = data
 
     def get_dataframe(self) -> pd.DataFrame:
-        return self.data
+        return self.data.copy()

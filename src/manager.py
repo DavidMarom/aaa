@@ -2,6 +2,13 @@ import pandas as pd
 
 from cleaner import clean_tweet_data
 from loader.csv_text_loader import CSVTextDataSetLoader
+from analysis.composite_analyzer import CompositeAnalyzer
+from analysis.named_analyzer import NamedAnalyzer
+from analysis.analyzers.records_count_analyzer import RecordsCountAnalyzer
+from analysis.analyzers.average_words_length_analyzer import AverageWordsLengthAnalyzer
+from analysis.analyzers.most_common_word_analyzer import MostCommonWordsAnalyzer
+from analysis.analyzers.top_longest_text_records_analyzer import TopLongestTextRecordsAnalyzer
+from analysis.analyzers.uppercase_word_count_analyzer import UppercaseWordCountAnalyzer
 
 TARGET_CATEGORY_FEATURE = "Biased"
 TARGET_TEXT_FEATURE = "Text"
@@ -12,6 +19,49 @@ DEFAULT_CATEGORY_NAME = 'total'
 loader = CSVTextDataSetLoader(filepath='data/tweets_dataset.csv',
                               chosen_features=[TARGET_TEXT_FEATURE,TARGET_CATEGORY_FEATURE])
 dataset = loader.load()
+
+analyzers = [
+    NamedAnalyzer(
+        "total_tweets", 
+        RecordsCountAnalyzer(dataset, 
+                             category_feature=TARGET_CATEGORY_FEATURE, 
+                             default_category=DEFAULT_CATEGORY_NAME)
+        ),
+    NamedAnalyzer(
+        "average_length", 
+        AverageWordsLengthAnalyzer(dataset, 
+                                   text_feature=TARGET_TEXT_FEATURE, 
+                                   category_feature=TARGET_CATEGORY_FEATURE,
+                                   default_category=DEFAULT_CATEGORY_NAME)
+        ),
+    NamedAnalyzer(
+        "common_words", 
+        MostCommonWordsAnalyzer(dataset, 
+                                text_feature=TARGET_TEXT_FEATURE, 
+                                top_n=NUM_COMMON_WORDS,
+                                default_category=DEFAULT_CATEGORY_NAME)
+        ),
+    NamedAnalyzer(
+        f"longest_{NUM_LONGEST_TWEETS}_tweets", 
+        TopLongestTextRecordsAnalyzer(dataset, 
+                                      text_feature=TARGET_TEXT_FEATURE, 
+                                      top_n=NUM_LONGEST_TWEETS, 
+                                      category_feature=TARGET_CATEGORY_FEATURE,
+                                      default_category=DEFAULT_CATEGORY_NAME)
+        ),
+    NamedAnalyzer(
+        "uppercase_words", 
+        UppercaseWordCountAnalyzer(dataset, 
+                                   text_feature=TARGET_TEXT_FEATURE, 
+                                   category_feature=TARGET_CATEGORY_FEATURE,
+                                   default_category=DEFAULT_CATEGORY_NAME)
+        )
+]
+
+# Run analysis
+composite_analyzer = CompositeAnalyzer(analyzers)
+results = composite_analyzer.run_all()
+
 
 # Question 2
 clean_df = clean_tweet_data(dataset.get_dataframe())
