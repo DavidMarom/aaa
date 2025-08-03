@@ -4,11 +4,13 @@ from analysis.analyzers.constants import DEFAULT_CATEGORY
 
 class UppercaseWordCountAnalyzer(Analyzer):
     def __init__(self, dataset: TextDataSet, text_feature:str, 
-                 category_feature:str=None, default_category:str=DEFAULT_CATEGORY):
+                 category_feature:str=None, default_category:str=DEFAULT_CATEGORY,
+                 dropna:bool=False):
         self.dataset = dataset
         self.text_feature = text_feature
         self.category_feature = category_feature
         self.default_category = default_category
+        self.dropna=dropna
 
     def analyze(self) -> dict:
         def count_upper(text):
@@ -17,6 +19,6 @@ class UppercaseWordCountAnalyzer(Analyzer):
         df['upper_count'] = df[self.text_feature].apply(count_upper)
         results = {}
         if self.category_feature:
-            results = df.groupby(self.category_feature, dropna=False)['upper_count'].sum().to_dict()
+            results = df.groupby(self.category_feature, dropna=self.dropna)['upper_count'].sum().to_dict()
         results[self.default_category] = int(df['upper_count'].sum())
         return results
