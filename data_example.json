@@ -1,0 +1,33 @@
+{
+    "total_tweets": {
+        "antisemitic": 512,
+        "non_antisemitic": 741,
+        "total": 12800,
+        "unspecified": 27
+    },
+    "average_length": {
+        "antisemitic": 18.3,
+        "non_antisemitic": 20.7,
+        "total": 24.2
+    },
+    "common_words": {
+        "total": ["the","and","is","to","jews","support","zionists","peace","fight","truth"]
+    },
+    "longest_three_tweets": {
+        "antisemitic": [
+            "Zionists control everything and lie about the holocaust for sympathy and power. Wake up, world.",
+            "Jews are manipulating global politics again. Open your eyes, they’ve done this before.",
+            "The media is owned by Zionists, they spread lies daily. Don’t believe anything they say!"
+        ],
+        "non_antisemitic": [
+            "Today we honor all communities and stand against hate. Peace and unity are stronger than division.",
+            "I’m proud to support equal rights for all people, regardless of religion, race or belief.",
+            "Education is the best way to fight ignorance and bigotry. We must keep learning and listening."
+        ]
+    },
+    "uppercase_words": {
+        "antisemitic": 139,
+        "non_antisemitic": 86,
+        "total": 421
+    }
+}
