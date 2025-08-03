@@ -1,5 +1,5 @@
-from ..entities.text_dataset import TextDataSet
-from .loader import TextDataSetLoader
+from entities.text_dataset import TextDataSet
+from loader.text_loader import TextDataSetLoader
 from typing import List
 import pandas as pd
 

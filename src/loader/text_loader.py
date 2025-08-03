@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from ..entities.text_dataset import TextDataSet
+from entities.text_dataset import TextDataSet
 
 class TextDataSetLoader(ABC):
     @abstractmethod

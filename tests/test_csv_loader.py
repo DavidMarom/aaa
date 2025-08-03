@@ -5,7 +5,7 @@ from pathlib import Path
 # Add the parent directory to the path so we can import from src
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from src.loader.csv_loader import CSVTextDataSetLoader
+from src.loader.csv_text_loader import CSVTextDataSetLoader
 
 ENCODING = 'utf-8' # Relevant Encoding for tweets_dataset.csv
 DATASET_FILEPATH_CSV = "data/tweets_dataset.csv"

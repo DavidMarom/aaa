@@ -1,6 +1,8 @@
 # aaa
 
 
+# Run Instructions
+Note: you need to run the program from AAA/main.py
 
 # Tests
 pyproject.toml file is a pytest configuration file that defines how pytest should behave when running tests in your project.
