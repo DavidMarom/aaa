@@ -18,5 +18,5 @@ class UppercaseWordCountAnalyzer(Analyzer):
         results = {}
         if self.category_feature:
             results = df.groupby(self.category_feature, dropna=False)['upper_count'].sum().to_dict()
-        results[self.default_category] = df['upper_count'].sum()
+        results[self.default_category] = int(df['upper_count'].sum())
         return results
