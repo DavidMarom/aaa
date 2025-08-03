@@ -10,6 +10,7 @@ from analysis.analyzers.most_common_word_analyzer import MostCommonWordsAnalyzer
 from analysis.analyzers.top_longest_text_records_analyzer import TopLongestTextRecordsAnalyzer
 from analysis.analyzers.uppercase_word_count_analyzer import UppercaseWordCountAnalyzer
 from results_transformer import ResultsTransformer
+from report_builder import ReportBuilder,JsonReportBuilder
 
 TARGET_CATEGORY_FEATURE = "Biased"
 TARGET_TEXT_FEATURE = "Text"
@@ -81,3 +82,6 @@ report_builder = ResultsTransformer(
 )
 final_results = report_builder.transform(results)
 
+report_builder:ReportBuilder = JsonReportBuilder(filepath="results/results", report=final_results)
+
+report_builder.save()
